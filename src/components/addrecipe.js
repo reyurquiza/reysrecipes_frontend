@@ -1,6 +1,9 @@
-// src/components/AddRecipe.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './addrecipe.css';  // Import the CSS file
+
+const API = 'http://3.22.164.96:8000/api/recipes/';
 
 const AddRecipe = () => {
     const [title, setTitle] = useState('');
@@ -8,6 +11,7 @@ const AddRecipe = () => {
     const [instructions, setInstructions] = useState('');
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState(null);
+    const navigate = useNavigate();  // Use navigate for redirection
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,7 +25,7 @@ const AddRecipe = () => {
             formData.append('image', image);
         }
 
-        axios.post('http://127.0.0.1:8000/api/recipes/', formData, {
+        axios.post(API, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -33,6 +37,7 @@ const AddRecipe = () => {
             setInstructions('');
             setAuthor('');
             setImage(null);
+            navigate('/');  // Redirect to home page
         })
         .catch(error => {
             console.error('There was an error adding the recipe!', error);
@@ -40,10 +45,10 @@ const AddRecipe = () => {
     };
 
     return (
-        <div>
+        <div className="add-recipe">
             <h1>Add Recipe</h1>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="form-group">
                     <label>Title:</label>
                     <input
                         type="text"
@@ -51,21 +56,21 @@ const AddRecipe = () => {
                         onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Ingredients:</label>
                     <textarea
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Instructions:</label>
                     <textarea
                         value={instructions}
                         onChange={(e) => setInstructions(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Author:</label>
                     <input
                         type="text"
@@ -73,7 +78,7 @@ const AddRecipe = () => {
                         onChange={(e) => setAuthor(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Image:</label>
                     <input
                         type="file"

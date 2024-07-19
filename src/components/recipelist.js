@@ -1,11 +1,14 @@
+// src/components/RecipeList.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './recipelist.css';
+import stockImage from './stock_image.jpg';  // Import a stock image
 
 const RecipeList = () => {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/recipes/')
+        axios.get('http://3.22.164.96:8000/api/recipes/')
             .then(response => {
                 setRecipes(response.data);
             })
@@ -15,17 +18,16 @@ const RecipeList = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Recipes</h1>
-            <ul>
-                {recipes.map(recipe => (
-                    <li key={recipe.id}>
-                        <h2>{recipe.title}</h2>
-                        <p>{recipe.ingredients}</p>
-                        <p>{recipe.instructions}</p>
-                    </li>
-                ))}
-            </ul>
+        <div className="recipe-list">
+            {recipes.map(recipe => (
+                <div className="recipe-card" key={recipe.id}>
+                    <img src={recipe.image || stockImage} alt={recipe.title} />
+                    <h2>{recipe.title}</h2>
+                    <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
+                    <p><strong>Instructions:</strong> {recipe.instructions}</p>
+                    <p><strong>Author:</strong> {recipe.author}</p>
+                </div>
+            ))}
         </div>
     );
 };
