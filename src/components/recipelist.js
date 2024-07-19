@@ -4,11 +4,13 @@ import axios from 'axios';
 import './recipelist.css';
 import stockImage from './stock_image.jpg';  // Import a stock image
 
+const API = 'http://ec2-18-217-79-15.us-east-2.compute.amazonaws.com:8000/api/recipes/';
+
 const RecipeList = () => {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        axios.get('http://3.22.164.96:8000/api/recipes/')
+        axios.get(API)
             .then(response => {
                 setRecipes(response.data);
             })

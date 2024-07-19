@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './addrecipe.css';  // Import the CSS file
 
-const API = 'http://3.22.164.96:8000/api/recipes/';
+const API = 'http://ec2-18-217-79-15.us-east-2.compute.amazonaws.com:8000/api/recipes/';
 
 const AddRecipe = () => {
     const [title, setTitle] = useState('');
