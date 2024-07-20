@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import './App.css';
 
 function App() {
+  const isSuperuser = true;
+
   return (
       <Router>
           <div className="App">
@@ -12,12 +14,12 @@ function App() {
                   <h1 className="App-title">Reys Recipes</h1>
                   <nav className="App-nav">
                       <Link to="/">Home</Link>
-                      <Link to="/add-recipe">Submit Recipe</Link>
+                      <Link to="/add-recipe">Submit a Recipe!</Link>
                   </nav>
               </header>
               <main>
                   <Routes>
-                      <Route path="/" element={<RecipeList />} />
+                      <Route path="/" element={<RecipeList isSuperuser={isSuperuser} />} />
                       <Route path="/add-recipe" element={<AddRecipe />} />
                   </Routes>
               </main>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './addrecipe.css';  // Import the CSS file
+import './addrecipe.css';
 
-const API = 'http://ec2-18-217-79-15.us-east-2.compute.amazonaws.com:8000/api/recipes/';
+// Ideally hide this 
+const API = 'http://18.144.63.82:8000/api/recipes/';
 
 const AddRecipe = () => {
     const [title, setTitle] = useState('');
@@ -11,7 +12,7 @@ const AddRecipe = () => {
     const [instructions, setInstructions] = useState('');
     const [author, setAuthor] = useState('');
     const [image, setImage] = useState(null);
-    const navigate = useNavigate();  // Use navigate for redirection
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
